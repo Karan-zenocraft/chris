@@ -1,0 +1,49 @@
+/*
+ Theme Name:   Ashe Child
+ Theme URI:    http://example.com
+ Description:  Ashe Child Theme
+ Author:       Rutusha Joshi
+ Author URI:   http://example.com
+ Template:     ashe
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  ashechild
+*/
+
+.header-logo a{
+	/*color: #fff !important;
+    float: left;
+    font-size: 1.3em;
+    padding-left: 10%*/
+    float: left;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 1.3em; 
+  line-height: 25px;
+}
+.header-logo a, .site-description{
+	color:#fff !important;
+}
+.site-description{
+	display: block;
+	float: left;
+	margin-left: -22%;
+	    margin-top: 5%;
+    font-size: 1.7em;
+}
+#featured-links h6{
+    color: #fff !important;
+    background-color: rgba(0,0,0, 0) !important;
+    border: 1px solid;
+    border-radius: 4px;
+}
+.social-icons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.social-icons img{
+  margin: 0px 10px;
+}
