@@ -47,3 +47,8 @@
 .social-icons img{
   margin: 0px 10px;
 }
+@media screen and (max-width: 979px){
+.custom_padding{
+  padding-top: 40px !important;
+}
+}
