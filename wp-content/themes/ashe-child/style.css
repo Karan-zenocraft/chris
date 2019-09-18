@@ -52,3 +52,13 @@
   padding-top: 40px !important;
 }
 }
+.story_image img{
+      width: 50%;
+    height: auto;
+}
+.story_list_row{
+  padding: 10%;
+}
+.story_image{
+  padding-bottom: 10%;
+}
