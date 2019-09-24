@@ -65,7 +65,7 @@ function wpsites_cpt_archive_items($query)
         $query->set('meta_key', 'page_number');
         $query->set('orderby', 'page_number');
         $query->set('order', 'ASC');
-        $query->set('posts_per_page', '6');
+        $query->set('posts_per_page', '2');
     }
 
 }

@@ -53,12 +53,22 @@
 }
 }
 .story_image img{
-      width: 50%;
+      width: 80%;
     height: auto;
+    margin: auto;
 }
 .story_list_row{
   padding: 10%;
 }
 .story_image{
   padding-bottom: 10%;
+}
+.page-numbers{
+  padding: 15px;
+  border:1px solid;
+  margin-right: 10px;
+}
+.page-numbers:hover{
+  text-decoration: none;
+
 }
