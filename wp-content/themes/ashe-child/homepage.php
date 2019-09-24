@@ -57,42 +57,42 @@ if ($sliderQuery->have_posts()):
             $featured_image = get_the_post_thumbnail_url();
         }
         ?>
-										<div class="slider-item">
+				<div class="slider-item">
 
-												<div class="slider-item-bg" style="background-image:url(<?php echo esc_url($featured_image); ?>);"></div>
+					<div class="slider-item-bg" style="background-image:url(<?php echo esc_url($featured_image); ?>);"></div>
 
-												<div class="cv-container image-overlay">
-													<div class="cv-outer">
-														<div class="cv-inner">
-															<div class="slider-info">
+					<div class="cv-container image-overlay">
+						<div class="cv-outer">
+							<div class="cv-inner">
+								<div class="slider-info">
 
-																<?php $category_list = get_the_category_list(', ');?>
+									<?php $category_list = get_the_category_list(', ');?>
 
-																<?php if ($category_list): ?>
-																<div class="slider-categories">
-																	<?php echo '' . $category_list; ?>
-																</div>
-																<?php endif;?>
+									<?php if ($category_list): ?>
+									<div class="slider-categories">
+										<?php echo '' . $category_list; ?>
+									</div>
+									<?php endif;?>
 
-						<h2 class="slider-title">
-							<a href="<?php echo esc_url(get_permalink()); ?>"><?php the_title();?></a>
-						</h2>
+		<h2 class="slider-title">
+		<a href="<?php echo esc_url(get_permalink()); ?>"><?php the_title();?></a>
+		</h2>
 
-						<div class="slider-content"><?php ashe_excerpt(30);?></div>
+		<div class="slider-content"><?php ashe_excerpt(30);?></div>
 
-						<div class="slider-read-more">
-							<a href="<?php echo esc_url(get_permalink()); ?>"><?php esc_html_e('read more', 'ashe');?></a>
-						</div>
+		<div class="slider-read-more">
+		<a href="<?php echo esc_url(get_permalink()); ?>"><?php esc_html_e('read more', 'ashe');?></a>
+		</div>
 
-						<div class="slider-date"><?php the_time(get_option('date_format'));?></div>
+		<div class="slider-date"><?php the_time(get_option('date_format'));?></div>
 
-					</div>
-				</div>
-			</div>
-			</div>
+		</div>
+		</div>
+		</div>
+		</div>
 
-			</div>
-									    <?php
+		</div>
+		<?php
 endwhile; // Loop end
 endif;
 
@@ -210,6 +210,7 @@ if (have_posts()):
 
         wp_link_pages($defaults);
         echo '</div>';
+        echo '<center><div class="slider-read-more"><a href="' . get_permalink() . '" target="_blank" rel="noopener noreferrer">Read More</a></div></center>';
 
     endwhile; // Loop End
 
