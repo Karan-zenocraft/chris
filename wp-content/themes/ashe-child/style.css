@@ -13,7 +13,7 @@
 */
 
 .header-logo a{
-	/*color: #fff !important;
+  /*color: #fff !important;
     float: left;
     font-size: 1.3em;
     padding-left: 10%*/
@@ -24,13 +24,13 @@
   line-height: 25px;
 }
 .header-logo a, .site-description{
-	color:#fff !important;
+  color:#fff !important;
 }
 .site-description{
-	display: block;
-	float: left;
-	margin-left: -22%;
-	    margin-top: 5%;
+  display: block;
+  float: left;
+  margin-left: -22%;
+      margin-top: 5%;
     font-size: 1.7em;
 }
 #featured-links h6{
@@ -84,4 +84,8 @@
 }
 .featured-link img{
 width: 100%
+}
+.copyright-info{
+  float:unset !important;
+  text-align: center !important;
 }
