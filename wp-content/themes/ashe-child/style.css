@@ -72,3 +72,16 @@
   text-decoration: none;
 
 }
+@media screen and (min-width:320px) and (max-width: 767px){
+.story_description{
+  text-align:center
+}
+}
+@media screen and (max-width: 768px){
+#featured-links {
+    display: block !important;
+}
+}
+.featured-link img{
+width: 100%
+}
