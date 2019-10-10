@@ -89,3 +89,17 @@ width: 100%
   float:unset !important;
   text-align: center !important;
 }
+.illustration{
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    color: #000!important;
+}
+.featured-link{transition: 0.25s ease;}
+.featured-link img{transform: scale(1.0);transition: 0.25s ease;}
+.featured-link:hover img{transform: scale(1.1);transition: 0.25s ease;}
+.image-overlay, #infscr-loading, .page-content h4.image-overlay {
+   color: #000!important;
+    background-color: unset!important; 
+}
+.image-overlay a, .post-slider .prev-arrow, .post-slider .next-arrow, .page-content .image-overlay a, #featured-slider .slick-arrow, #featured-slider .slider-dots{color: #ca9b52!important;}

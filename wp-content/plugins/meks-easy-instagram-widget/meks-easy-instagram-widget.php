@@ -2,7 +2,7 @@
 /*
 Plugin Name: Meks Easy Photo Feed Widget
 Description: Easily display Instagram photos as a widget that looks good in (almost) any WordPress theme.
-Version: 1.0.7
+Version: 1.1.2
 Author: Meks
 Author URI: https://mekshq.com
 Text Domain: meks-easy-instagram-widget
@@ -17,7 +17,19 @@ if ( !defined( 'DB_NAME' ) ) {
 
 define( 'MEKS_INSTAGRAM_WIDGET_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 define( 'MEKS_INSTAGRAM_WIDGET_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
-define( 'MEKS_INSTAGRAM_WIDGET_VER', '1.0.7' );
+define( 'MEKS_INSTAGRAM_WIDGET_VER', '1.1.2' );
+define( 'MEKS_INSTAGRAM_BASENAME', plugin_basename( __FILE__ ) );
+
+/* Initialize Options */
+if ( !function_exists( 'meks_instagram_options_init' ) ):
+    function meks_instagram_options_init() {
+        require_once MEKS_INSTAGRAM_WIDGET_DIR.'inc/class-instagram-options.php';
+        Meks_Instagram_Options::get_instance();
+    }
+endif;
+
+add_action( 'init', 'meks_instagram_options_init' );
+
 
 /* Initialize Widget */
 if ( !function_exists( 'meks_instagram_widget_init' ) ):
@@ -31,7 +43,7 @@ add_action( 'widgets_init', 'meks_instagram_widget_init' );
 
 /* Load text domain */
 function meks_load_instagram_widget_text_domain() {
-    load_plugin_textdomain( 'meks-instagram-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+    load_plugin_textdomain( 'meks-easy-instagram-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
 
 add_action( 'plugins_loaded', 'meks_load_instagram_widget_text_domain' );

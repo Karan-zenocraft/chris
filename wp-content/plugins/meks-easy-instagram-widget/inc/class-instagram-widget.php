@@ -27,32 +27,47 @@ class Meks_Instagram_Widget extends WP_Widget {
 	protected $defaults;
 
 	/**
-	 * Specifies the classname and description, instantiates the widget and includes necessary stylesheets and JavaScript.
+	 * Access Token
+	 *
+	 * @since    1.0.0
+	 * @var      array
+	 */
+	private $access_token;
+
+	/**
+	 * Username
+	 *
+	 * @since    1.0.0
+	 * @var      array
+	 */
+	private $username;
+
+	/**
+	 * Specifies the class name and description, instantiates the widget and includes necessary stylesheets and JavaScript.
 	 */
 	public function __construct() {
 
 		parent::__construct(
 			$this->widget_slug,
-			__( 'Meks Easy Instagram Widget', $this->widget_text_domain ),
+			__( 'Meks Easy Instagram Widget', 'meks-easy-instagram-widget' ),
 			array(
-				'description' => __( 'Easily display Instagram photos with this widget.', $this->widget_text_domain )
+				'description' => __( 'Easily display Instagram photos with this widget.', 'meks-easy-instagram-widget' ),
 			)
 		);
 
 		$this->defaults = array(
-			'title' => 'Instagram',
+			'title'            => 'Instagram',
 			'username_hashtag' => '',
-			'photos_number' => 9,
-			'columns' => 3,
-			'photo_space' => 1,
-			'container_size' => 300,
-			'transient_time' => DAY_IN_SECONDS,
-			'link_text' => __( 'Follow', $this->widget_text_domain ),
+			'photos_number'    => 9,
+			'columns'          => 3,
+			'photo_space'      => 1,
+			'container_size'   => 300,
+			'transient_time'   => DAY_IN_SECONDS,
+			'link_text'        => __( 'Follow', 'meks-easy-instagram-widget' ),
 		);
 
 		// Allow themes or plugins to modify default parameters
 		$this->defaults = apply_filters( 'meks_instagram_widget_modify_defaults', $this->defaults );
-
 
 		// Register site styles and scripts
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_widget_styles' ) );
@@ -60,6 +75,11 @@ class Meks_Instagram_Widget extends WP_Widget {
 		// Register admin styles and scripts
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_script' ) );
 
+	}
+
+	public function is_authorized(){
+
+		return !empty($this->access_token);
 	}
 
 
@@ -70,6 +90,9 @@ class Meks_Instagram_Widget extends WP_Widget {
 	 * @param array   instance The current instance of the widget
 	 */
 	public function widget( $args, $instance ) {
+
+		$widget_settings    = get_option( 'meks_instagram_settings' );
+		$this->access_token = isset($widget_settings['access_token']) ? $widget_settings['access_token'] : '';
 
 		extract( $args, EXTR_SKIP );
 		$instance = wp_parse_args( (array) $instance, $this->defaults );
@@ -91,14 +114,14 @@ class Meks_Instagram_Widget extends WP_Widget {
 		}
 
 		$photos = $this->limit_images_number( $photos, $instance['photos_number'] );
-		$size = $this->calculate_image_size( $instance['container_size'], $instance['photo_space'], $instance['columns'] );
+		$size   = $this->calculate_image_size( $instance['container_size'], $instance['photo_space'], $instance['columns'] );
 
 		$follow_link = $this->get_follow_link( $instance['username_hashtag'] );
 
 		ob_start();
-		include $this->get_template( MEKS_INSTAGRAM_WIDGET_DIR .'views/widget_html' );
+		include $this->get_template( MEKS_INSTAGRAM_WIDGET_DIR . 'views/widget_html' );
 		$widget_content = ob_get_clean();
-		
+
 		echo $widget_content;
 		echo $after_widget;
 
@@ -106,22 +129,22 @@ class Meks_Instagram_Widget extends WP_Widget {
 
 
 	/**
-	 * Processes the widget's options to be saved.
+	 * Processes the widget options to be saved.
 	 *
 	 * @param array   new_instance The new instance of values to be generated via the update.
 	 * @param array   old_instance The previous instance of values before the update.
 	 */
 	public function update( $new_instance, $old_instance ) {
 
-		$instance = array();
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance                     = array();
+		$instance['title']            = strip_tags( $new_instance['title'] );
 		$instance['username_hashtag'] = strip_tags( $new_instance['username_hashtag'] );
-		$instance['photos_number'] = absint( $new_instance['photos_number'] );
-		$instance['columns'] = absint( $new_instance['columns'] );
-		$instance['photo_space'] = absint( $new_instance['photo_space'] );
-		$instance['container_size'] = absint( $new_instance['container_size'] );
-		$instance['transient_time'] = absint( $new_instance['transient_time'] );
-		$instance['link_text'] = strip_tags( $new_instance['link_text'] );
+		$instance['photos_number']    = absint( $new_instance['photos_number'] );
+		$instance['columns']          = absint( $new_instance['columns'] );
+		$instance['photo_space']      = absint( $new_instance['photo_space'] );
+		$instance['container_size']   = absint( $new_instance['container_size'] );
+		$instance['transient_time']   = absint( $new_instance['transient_time'] );
+		$instance['link_text']        = strip_tags( $new_instance['link_text'] );
 
 		return $instance;
 
@@ -145,14 +168,14 @@ class Meks_Instagram_Widget extends WP_Widget {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string  $template
+	 * @param string $template
 	 * @return string      - File Path
 	 */
 	private function get_template( $template ) {
 		$template_slug = rtrim( $template, '.php' );
-		$template = $template_slug . '.php';
+		$template      = $template_slug . '.php';
 
-		if ( $theme_file = locate_template( array( '/core/widgets/'.$template ) ) ) :
+		if ( $theme_file = locate_template( array( '/core/widgets/' . $template ) ) ) :
 			$file = $theme_file;
 		else :
 			$file = $template;
@@ -166,8 +189,8 @@ class Meks_Instagram_Widget extends WP_Widget {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string  $username_or_hashtag Searched username or hashtag
-	 * @param int  $transient_time Time in seconds
+	 * @param string $username_or_hashtag Searched username or hashtag
+	 * @param int    $transient_time Time in seconds
 	 * @return array  List of all photos sizes with additional information
 	 */
 	protected function get_photos( $usernames_or_hashtags, $transient_time ) {
@@ -180,50 +203,46 @@ class Meks_Instagram_Widget extends WP_Widget {
 
 		$cached = get_transient( $transient_key );
 
-		if ( !empty( $cached ) ) {
+		if ( ! empty( $cached ) ) {
 			return $cached;
 		}
 
 		$usernames_or_hashtags = explode( ',', $usernames_or_hashtags );
 
+		if ( $this->is_authorized() && count( $usernames_or_hashtags ) > 1 ) {
+			$usernames_or_hashtags = str_replace( '@', '', current( $usernames_or_hashtags ) );
+			$usernames_or_hashtags = array( $usernames_or_hashtags );
+
+		}
+
 		$images = array();
 
 		foreach ( $usernames_or_hashtags as  $username_or_hashtag ) {
 
-			$username_or_hashtag = trim( $username_or_hashtag );
+			$this->username = trim( $username_or_hashtag );
 
-			$url = $this->get_instagram_url( $username_or_hashtag );			
-			$data = $this->get_instagram_data( $url );
+			$data = $this->get_instagram_data();
 
-			if( $this->should_try_proxy( $data ) ){
-
-				$proxies = $this->get_proxies();
-
-				foreach( $proxies as $proxy ){
-					$url = $this->get_instagram_url( $username_or_hashtag, $proxy );
-					$data = $this->get_instagram_data( $url );
-					if ( !is_wp_error( $data ) ){
-						break;
-					}
-				}
-			}
-		
-			if ( is_wp_error( $data ) ){
+			if ( is_wp_error( $data ) ) {
 				return $data;
 			}
 
 			$images[] = $data;
 		}
 
-		$images =  array_reduce( $images, 'array_merge', array() );
+		$images = array_reduce( $images, 'array_merge', array() );
 
-		usort( $images, function ( $a, $b ) {
-				if ( $a['time'] == $b['time'] ) return 0;
+		usort(
+			$images,
+			function ( $a, $b ) {
+				if ( $a['time'] == $b['time'] ) {
+					return 0;
+				}
 				return ( $a['time'] < $b['time'] ) ? 1 : -1;
-			} );
+			}
+		);
 
-
-		if( $transient_time < (12 * HOUR_IN_SECONDS ) ){
+		if ( !$this->is_authorized() && $transient_time < ( 12 * HOUR_IN_SECONDS ) ) {
 			$transient_time = DAY_IN_SECONDS;
 		}
 
@@ -234,11 +253,11 @@ class Meks_Instagram_Widget extends WP_Widget {
 
 
 	/**
-	 * Generates transient key to cache the results 
+	 * Generates transient key to cache the results
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	function generate_transient_key( $usernames_or_hashtags ) {
 
@@ -247,38 +266,33 @@ class Meks_Instagram_Widget extends WP_Widget {
 		return $transient_key;
 
 	}
-	
+
 
 	/**
 	 * Function to return endpoint URL or simple URL for follow link
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string  $searched_term
+	 * @param string $searched_term
 	 * @param string $proxy
 	 * @return string    - URL
 	 */
-	protected function get_instagram_url( $searched_term, $proxy = '' ) {
+	protected function get_instagram_url() {
 
-		$searched_term = trim( strtolower( $searched_term ) );
+		$searched_term = trim( strtolower( $this->username ) );
 
 		switch ( substr( $searched_term, 0, 1 ) ) {
-		case '#':
-			$url = 'https://instagram.com/explore/tags/' . str_replace( '#', '', $searched_term );
-			break;
+			case '#':
+				$url = 'https://instagram.com/explore/tags/' . str_replace( '#', '', $searched_term );
+				break;
 
-		default:
-			$url = 'https://instagram.com/' . str_replace( '@', '', $searched_term );
-			break;
-		}
-
-		if( $proxy ){
-			$url = $proxy . urlencode( $url );
+			default:
+				$url = 'https://instagram.com/' . str_replace( '@', '', $searched_term );
+				break;
 		}
 
 		return $url;
 	}
-
 
 
 	/**
@@ -286,25 +300,88 @@ class Meks_Instagram_Widget extends WP_Widget {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string  $url - Instagram URL API endpoint
-	 * @return array        - List of collected images
+	 * @return array  - List of collected images
 	 */
-	protected function get_instagram_data( $url ) {
-		
-		$request = wp_remote_get( $url );
+	protected function get_instagram_data() {
 
-		if ( is_wp_error( $request ) || empty( $request ) ) {
-			return new WP_Error( 'communicate', esc_html__( 'Unable to communicate with Instagram. This may be a temporary problem. Please try again soon.', $this->widget_text_domain ) );
+		if ( !$this->is_authorized() ) {
+			return $this->get_instagram_data_without_token();
 		}
 
-		$body = wp_remote_retrieve_body( $request );
+		return $this->get_instagram_data_with_token();
 
-		$shared      = explode( 'window._sharedData = ', $body );
-		$json  = explode( ';</script>', $shared[1] );
-		$data = json_decode( $json[0], true );
+	}
+
+	/**
+	 * Make request with token.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array List of collected images
+	 */
+	protected function get_instagram_data_with_token() {
+
+		$response = wp_remote_get( sprintf( 'https://api.instagram.com/v1/users/self/media/recent/?access_token=%s', $this->access_token ) );
+
+		if ( is_wp_error( $response ) || 200 != wp_remote_retrieve_response_code( $response ) ) {
+			return new WP_Error( 'invalid-token', esc_html__( 'Invalid username or token.', 'meks-easy-instagram-widget' ) );
+		}
+
+		$data           = json_decode( wp_remote_retrieve_body( $response ) );
+		$token_username = ! empty( $data->data[0]->user->username ) ? $data->data[0]->user->username : '';
+
+		$this->username = str_replace( '@', '', $this->username );
+
+		if ( ! empty( $token_username ) && ! empty( $this->username ) ) {
+
+			if ( $this->username !== $token_username ) {
+
+				$data = $this->get_instagram_data_without_token();
+
+				if ( ! empty( $data ) ) {
+					return $data;
+				}
+
+				if ( empty( $data ) ) {
+					return new WP_Error( 'authorized-user', esc_html__( 'Invalid username. Authorized users can only pull images from their own account.', 'meks-easy-instagram-widget' ) );
+				}
+			}
+		}
+
+		$images = $this->parse_instagram_images_with_token( $data );
+
+		if ( empty( $images ) ) {
+			return new WP_Error( 'no_images', esc_html__( 'Images not found. This may be a temporary problem. Please try again soon.', 'meks-easy-instagram-widget' ) );
+		}
+
+		return $images;
+
+	}
+
+
+	/**
+	 * Make request without token
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	protected function get_instagram_data_without_token() {
+
+		$url = $this->get_instagram_url();
+
+		
+		
+
+		$request = wp_remote_get( $url );
+		$body    = wp_remote_retrieve_body( $request );
+
+		$shared = explode( 'window._sharedData = ', $body );
+		$json   = explode( ';</script>', $shared[1] );
+		$data   = json_decode( $json[0], true );
 
 		if ( empty( $data ) ) {
-			return new WP_Error( 'invalid', esc_html__( 'Instagram has returned empty data. Please check your username/hashtag.',  $this->widget_text_domain ) );
+			return new WP_Error( 'blocked',  sprintf( esc_html__('Instagram has returned empty data. Please authorize your Instagram account in the %s plugin settings %s.', 'meks-easy-instagram-widget' ), '<a href="'.esc_url( admin_url( 'options-general.php?page=meks-instagram' ) ).'">', '</a>') );
 		}
 
 		if ( isset( $data['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'] ) ) {
@@ -312,78 +389,18 @@ class Meks_Instagram_Widget extends WP_Widget {
 		} elseif ( isset( $data['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']['edges'] ) ) {
 			$images = $data['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']['edges'];
 		} else {
-			return new WP_Error( 'invalid', esc_html__( 'Instagram has returned invalid data.',  $this->widget_text_domain ) );
+			return new WP_Error( 'blocked',  sprintf( esc_html__('Instagram has returned empty data. Please authorize your Instagram account in the %s plugin settings %s.', 'meks-easy-instagram-widget' ), '<a href="'.esc_url( admin_url( 'options-general.php?page=meks-instagram' ) ).'">', '</a>') );
 		}
 
-		$images = $this->parse_instagram_images( $images );
-
+		
+		$images = $this->parse_instagram_images_without_token( $images );
+		
 		if ( empty( $images ) ) {
-			return new WP_Error( 'no_images', esc_html__( 'Images not found. This may be a temporary problem. Please try again soon.', $this->widget_text_domain ) );
+			return new WP_Error( 'no_images', esc_html__( 'Images not found. This may be a temporary problem. Please try again soon.', 'meks-easy-instagram-widget' ) );
 		}
 
 		return $images;
 
-	}
-
-	/**
-	 * Function to create a workaround for websites on shared hostings blocked by Instagram
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array List of proxies
-	 */
-	function get_proxies(){
-
-		$proxies = array(
-			'https://eu1.proxysite.com/process.php?d=',
-			'https://eu2.proxysite.com/process.php?d=',
-			'https://eu3.proxysite.com/process.php?d=',
-			'https://eu4.proxysite.com/process.php?d=',
-			'https://eu5.proxysite.com/process.php?d=',
-			'https://eu6.proxysite.com/process.php?d=',
-			'https://eu7.proxysite.com/process.php?d=',
-			'https://eu8.proxysite.com/process.php?d=',
-			'https://eu9.proxysite.com/process.php?d=',
-			'https://eu10.proxysite.com/process.php?d=',
-			'https://us1.proxysite.com/process.php?d=',
-			'https://us2.proxysite.com/process.php?d=',
-			'https://us3.proxysite.com/process.php?d=',
-			'https://us4.proxysite.com/process.php?d=',
-			'https://us5.proxysite.com/process.php?d=',
-			'https://us6.proxysite.com/process.php?d=',
-			'https://us7.proxysite.com/process.php?d=',
-			'https://us8.proxysite.com/process.php?d=',
-			'https://us9.proxysite.com/process.php?d=',
-			'https://us10.proxysite.com/process.php?d=',
-			'https://us11.proxysite.com/process.php?d=',
-			'https://us12.proxysite.com/process.php?d=',
-			'https://us13.proxysite.com/process.php?d=',
-			'https://us14.proxysite.com/process.php?d=',
-			'https://us15.proxysite.com/process.php?d=',
-			'https://proxy-us7.toolur.com/browse.php?u=',
-		);
-
-		shuffle( $proxies );
-
-		$proxies = array_slice( $proxies, 0, 10 );
-
-		return apply_filters( 'meks_instagram_modify_proxies', $proxies );
-	}
-
-	/**
-	 * Check if Instagram blocked the IP and if we should try to access the data via proxy
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool
-	 */
-	function should_try_proxy( $data ){
-
-		if( is_wp_error( $data ) && $data->get_error_code() == 'invalid' ){
-			return true;
-		}
-
-		return false;
 	}
 
 
@@ -392,26 +409,59 @@ class Meks_Instagram_Widget extends WP_Widget {
 	 *
 	 * @since  1.0.1
 	 *
-	 * @param array   $images - Raw Images
+	 * @param array $data
+	 * @return array  - List of images prepared for displaying
+	 */
+	protected function parse_instagram_images_with_token( $data ) {
+
+		$pretty_images = array();
+
+		foreach ( $data->data as $image ) {
+
+			$pretty_images[] = array(
+				'caption'   => isset( $image->caption->text ) ? $image->caption->text : '',
+				'link'      => trailingslashit( $image->link ),
+				'time'      => $image->created_time,
+				'comments'  => $image->comments->count,
+				'likes'     => $image->likes->count,
+				'thumbnail' => $image->images->thumbnail->url, // 150x150
+				'small'     => $image->images->low_resolution->url, // 320x320
+				'medium'    => $image->images->low_resolution->url, // 320x320
+				'large'     => $image->images->standard_resolution->url, // 640x640
+				'original'  => $image->images->standard_resolution->url, // 640x640
+			);
+
+		}
+
+		return $pretty_images;
+	}
+
+
+	/**
+	 * Parse instagram images
+	 *
+	 * @since  1.0.1
+	 *
+	 * @param array $images - Raw Images
 	 * @return array           - List of images prepared for displaying
 	 */
-	protected function parse_instagram_images( $images ) {
+	protected function parse_instagram_images_without_token( $images ) {
 
 		$pretty_images = array();
 
 		foreach ( $images as $image ) {
-			
+
 			$pretty_images[] = array(
-				'caption'    => isset( $image['node']['edge_media_to_caption']['edges'][0]['node']['text'] ) ? $image['node']['edge_media_to_caption']['edges'][0]['node']['text'] : '',
-				'link'       => trailingslashit( 'https://instagram.com/p/' . $image['node']['shortcode'] ),
-				'time'     	 => $image['node']['taken_at_timestamp'],
-				'comments'   => $image['node']['edge_media_to_comment']['count'],
-				'likes'   	 => $image['node']['edge_liked_by']['count'],
-				'thumbnail'   => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][0]['src'] ), //150
-				'small'       => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][1]['src'] ), //240
-				'medium'       => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][2]['src'] ), //320
-				'large'       => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][3]['src'] ), //480
-				'original'    => preg_replace( '/^https?\:/i', '', $image['node']['display_url'] ),
+				'caption'   => isset( $image['node']['edge_media_to_caption']['edges'][0]['node']['text'] ) ? $image['node']['edge_media_to_caption']['edges'][0]['node']['text'] : '',
+				'link'      => trailingslashit( 'https://instagram.com/p/' . $image['node']['shortcode'] ),
+				'time'      => $image['node']['taken_at_timestamp'],
+				'comments'  => $image['node']['edge_media_to_comment']['count'],
+				'likes'     => $image['node']['edge_liked_by']['count'],
+				'thumbnail' => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][0]['src'] ), // 150
+				'small'     => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][1]['src'] ), // 240
+				'medium'    => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][2]['src'] ), // 320
+				'large'     => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][3]['src'] ), // 480
+				'original'  => preg_replace( '/^https?\:/i', '', $image['node']['display_url'] ),
 			);
 
 		}
@@ -425,8 +475,8 @@ class Meks_Instagram_Widget extends WP_Widget {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param array   $photos - Lists of images
-	 * @param number  $limit  - Max number of image that we want to show
+	 * @param array  $photos - Lists of images
+	 * @param number $limit  - Max number of image that we want to show
 	 * @return array             - Limited List
 	 */
 	protected function limit_images_number( $photos, $limit = 1 ) {
@@ -441,40 +491,40 @@ class Meks_Instagram_Widget extends WP_Widget {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param int     $container_size
-	 * @param int     $photo_space
-	 * @param int     $columns
+	 * @param int $container_size
+	 * @param int $photo_space
+	 * @param int $columns
 	 * @return array              - Proper image size and flex column calculation
 	 */
 	public function calculate_image_size( $container_size, $photo_space, $columns ) {
 
 		$width = ( $container_size - ( $photo_space * ( $columns - 1 ) ) ) / $columns;
-		$flex = 100 / $columns;
+		$flex  = 100 / $columns;
 
-		$size = array();
+		$size         = array();
 		$size['flex'] = $flex;
 
 		switch ( $width ) {
 
-		case $width <= 150 :
-			$size['thumbnail'] = 'thumbnail';
-			break;
+			case $width <= 150:
+				$size['thumbnail'] = 'thumbnail';
+				break;
 
-		case $width <= 240 :
-			$size['thumbnail'] = 'small';
-			break;
+			case $width <= 240:
+				$size['thumbnail'] = 'small';
+				break;
 
-		case $width <= 320 :
-			$size['thumbnail'] = 'medium';
-			break;
+			case $width <= 320:
+				$size['thumbnail'] = 'medium';
+				break;
 
-		case $width <= 480 :
-			$size['thumbnail'] = 'large';
-			break;
+			case $width <= 480:
+				$size['thumbnail'] = 'large';
+				break;
 
-		default:
-			$size['thumbnail'] = 'original';
-			break;
+			default:
+				$size['thumbnail'] = 'original';
+				break;
 		}
 
 		return $size;
@@ -486,33 +536,32 @@ class Meks_Instagram_Widget extends WP_Widget {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string  $usernames_or_hashtags String from username or hashtag input field
+	 * @param string $usernames_or_hashtags String from username or hashtag input field
 	 * @return string    Follow URL or empty string
 	 */
 	protected function get_follow_link( $usernames_or_hashtags ) {
 
-		$usernames_hashtags_array = explode( ',', $usernames_or_hashtags );
-		$number_of_username_hashtag = count( $usernames_hashtags_array );
-
-		if ( $number_of_username_hashtag !== 1 ) return '';
-
-		return  $this->get_instagram_url( $usernames_or_hashtags );
+		$usernames_hashtags_array   = explode( ',', $usernames_or_hashtags );
+		$usernames_hashtags   = str_replace( '@', '', current( $usernames_hashtags_array ) );
+		$this->username = $usernames_hashtags;
+		
+		return $this->get_instagram_url();
 	}
 
 
 	/**
-	 * Registers and enqueues widget-specific styles.
+	 * Registers and enqueue widget-specific styles.
 	 */
 	public function register_widget_styles() {
-		wp_enqueue_style( $this->widget_slug.'-widget-styles', MEKS_INSTAGRAM_WIDGET_URL . 'css/widget.css' );
+		wp_enqueue_style( $this->widget_slug . '-widget-styles', MEKS_INSTAGRAM_WIDGET_URL . 'css/widget.css' );
 	}
 
 	/**
-	 * Registers and enqueues admin specific scripts.
+	 * Registers and enqueue admin specific scripts.
 	 */
 	public function register_admin_script() {
-		wp_enqueue_script( $this->widget_slug.'-admin-script', MEKS_INSTAGRAM_WIDGET_URL . 'js/admin.js', true, MEKS_INSTAGRAM_WIDGET_VER );
-		wp_enqueue_style( $this->widget_slug.'-admin-styles', MEKS_INSTAGRAM_WIDGET_URL . 'css/admin.css' );
+		wp_enqueue_script( $this->widget_slug . '-admin-script', MEKS_INSTAGRAM_WIDGET_URL . 'js/admin.js', true, MEKS_INSTAGRAM_WIDGET_VER );
+		wp_enqueue_style( $this->widget_slug . '-admin-styles', MEKS_INSTAGRAM_WIDGET_URL . 'css/admin.css' );
 	}
 
 

@@ -4,7 +4,7 @@ Donate link: https://mekshq.com/
 Tags: instagram, instagram widget, instagram feed, instagram gallery, instagram images, instagram hashtag, sidebar, images, photos, widget, 
 Requires at least: 3.7
 Tested up to: 5.2
-Stable tag: 1.0.7
+Stable tag: 1.1.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -16,7 +16,7 @@ Meks Easy Photo Feed (formerly Instagram) Widget WordPress plugin is made to hel
 
 == Features ==
 
-* No Instagram authorization required
+* No Instagram authorization required (optional)
 * Pull Instagram images by username or a hashtag
 * Multiple usernames, hashtags and its combination is also supported
 * Choose number of Instagram photos to pull
@@ -49,6 +49,15 @@ For any questions, error reports and suggestions please visit https://mekshq.com
 5. Widget options
 
 == Changelog ==
+
+= 1.1.2 = 
+* Fixed: Settings page link not properly displayed 
+
+= 1.1.1 = 
+* Fixed: Authorization flow not working properly for footer section in Meks themes
+
+= 1.1 = 
+* Added: Authorization settings page (for websites/IPs which are not allowed to request images from Instagram directly)
 
 = 1.0.7 =
 * Improved: Workaround for websites on shared hosting/IP blocked by Instagram server which are unable to retrieve the images

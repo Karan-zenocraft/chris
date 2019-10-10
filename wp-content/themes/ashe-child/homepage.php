@@ -54,45 +54,45 @@ if ($sliderQuery->have_posts()):
             $featured_image = $preview_images[$preview_count];
             $preview_count++;
         } else {
-            $featured_image = get_the_post_thumbnail_url();
+            $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full', false);
         }
         ?>
-						<div class="slider-item">
+											<div class="slider-item">
 
-							<div class="slider-item-bg" style="background-image:url(<?php echo esc_url($featured_image); ?>);"></div>
+												<div class="slider-item-bg" style="background-image:url(<?php echo esc_url($featured_image[0]); ?>);"></div>
 
-							<div class="cv-container image-overlay">
-								<div class="cv-outer">
-									<div class="cv-inner">
-										<div class="slider-info">
+												<div class="cv-container image-overlay">
+													<div class="cv-outer">
+														<div class="cv-inner">
+															<div class="slider-info">
 
-											<?php $category_list = get_the_category_list(', ');?>
+																<?php $category_list = get_the_category_list(', ');?>
 
-											<?php if ($category_list): ?>
-											<div class="slider-categories">
-												<?php echo '' . $category_list; ?>
-											</div>
-											<?php endif;?>
+																<?php if ($category_list): ?>
+																<div class="slider-categories">
+																	<?php echo '' . $category_list; ?>
+																</div>
+																<?php endif;?>
 
-			<h2 class="slider-title">
-			<a href="<?php echo esc_url(get_permalink()); ?>"><?php the_title();?></a>
-			</h2>
+					<h2 class="slider-title">
+					<a href="<?php echo esc_url(get_permalink()); ?>"><?php the_title();?></a>
+					</h2>
 
-			<div class="slider-content"><?php ashe_excerpt(30);?></div>
+					<div class="slider-content"><?php ashe_excerpt(30);?></div>
 
-			<div class="slider-read-more">
-			<a href="<?php echo esc_url(get_permalink()); ?>"><?php esc_html_e('read more', 'ashe');?></a>
-			</div>
+					<div class="slider-read-more">
+					<a href="<?php echo esc_url(get_permalink()); ?>"><?php esc_html_e('read more', 'ashe');?></a>
+					</div>
 
-			<div class="slider-date"><?php the_time(get_option('date_format'));?></div>
+					<div class="slider-date"><?php the_time(get_option('date_format'));?></div>
 
-			</div>
-			</div>
-			</div>
-			</div>
+					</div>
+					</div>
+					</div>
+					</div>
 
-			</div>
-			<?php
+					</div>
+					<?php
 endwhile; // Loop end
 endif;
 
@@ -101,6 +101,9 @@ endif;
 </div><!-- #featured-slider -->
 
 </div><!-- .featured-slider-area -->
+<h2 class="illustration">
+					Glimpse of the Book
+					</h2>
 <div id="featured-links" class="<?php echo esc_attr(ashe_options('general_links_width')) === 'boxed' ? ' boxed-wrapper' : ''; ?> clear-fix">
 
 	<!-- Link 1 -->
@@ -118,7 +121,7 @@ $link_title_1 = ashe_options('featured_links_title_1');
 		<a href="<?php echo esc_url(ashe_options('featured_links_url_1')); ?>">
 			<div class="cv-outer">
 				<div class="cv-inner">
-					<h6><?php echo esc_html($link_title_1); ?></h6>
+					<!-- <h6><?php //echo esc_html($link_title_1); ?></h6> -->
 				</div>
 			</div>
 		</a>
@@ -140,7 +143,7 @@ $link_title_2 = ashe_options('featured_links_title_2');
 		<a href="<?php echo esc_url(ashe_options('featured_links_url_2')); ?>">
 			<div class="cv-outer">
 				<div class="cv-inner">
-					<h6><?php echo esc_html($link_title_2); ?></h6>
+					<!-- <h6><?php //echo esc_html($link_title_2); ?></h6> -->
 				</div>
 			</div>
 		</a>
@@ -162,7 +165,7 @@ $link_title_3 = ashe_options('featured_links_title_3');
 		<a href="<?php echo esc_url(ashe_options('featured_links_url_3')); ?>">
 			<div class="cv-outer">
 				<div class="cv-inner">
-					<h6><?php echo esc_html($link_title_3); ?></h6>
+					<!-- <h6><?php //echo esc_html($link_title_3); ?></h6> -->
 				</div>
 			</div>
 		</a>
@@ -200,7 +203,7 @@ if (have_posts()):
         }
 
         echo '<div class="post-content">';
-        the_content('');
+        ashe_excerpt(73);
 
         // Post Pagination
         $defaults = array(
