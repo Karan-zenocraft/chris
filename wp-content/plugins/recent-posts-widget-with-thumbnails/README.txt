@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: images, posts list, recent posts, thumbnails, widget
 Requires at least: 2.9
 Requires PHP: 5.2
-Tested up to: 5.2.1
-Stable tag: 6.5.1
+Tested up to: 5.2.4
+Stable tag: 6.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,9 +31,9 @@ You can set the width and heigth of the thumbnails in the list. The thumbnails a
 
 = What users wrote =
 
+* **The best of the recent posts widgets** in the [reviews](https://wordpress.org/support/topic/the-best-of-the-recent-posts-widget/) by noddemix on June 13, 2019
 * **Number 8** in [14 Plugins para Otimizar seu Site](https://ideiasdig.com/14-plugins-para-otimizar-seu-site/#8Recent_Posts_Widget_With_Thumbnails) by Ideias Dig on November 8, 2018
 * **"Truly EXCELLENT Plugin!"** in the [reviews](https://wordpress.org/support/topic/truly-excellent-plugin/) by dnuttal on October 11, 2018
-* **"BEST of its KIND!!!"** in the [reviews](https://wordpress.org/support/topic/best-of-its-kind-32/) by shirtguy72 on June 3, 2018
 * **"Easier than making an egg, seriously."** in the [reviews](https://wordpress.org/support/topic/easier-than-making-an-egg-seriously/) by djackofall on October 2, 2017
 * **"This plugin is INCREDIBLE"** in the [reviews](https://wordpress.org/support/topic/do-you-also-have-one-for-most-popular-posts/) by lucio7 on August 25, 2017
 * **Number 16** in [20 WordPress Plugins Every Blogger Needs to Increase Engagement](http://nocturnalthrive.com/2017/08/09/20-free-wordpress-plugins-every-blogger-needs/) by Nocturnal Thrive on August 9, 2017
@@ -232,6 +232,12 @@ If you want to contribute a translation of the plugin in your language it would 
 2. The second screenshot shows the widget on the Widget Management Page in the backend.
 
 == Changelog ==
+
+= 6.6.0 =
+* Added option to display only the default thumbnail
+* Updated *.pot file and translations
+* Tested successfully with WordPress 5.2.4
+* Updated screenshot of widget in the backend
 
 = 6.5.1 =
 * Tested successfully with WordPress 5.2.1
@@ -525,6 +531,9 @@ Successfully tested with WordPress 4.0
 * The plugin was released.
 
 == Upgrade Notice ==
+
+= 6.6.0 =
+Added option to display only the default thumbnail, updated translations, tested with WordPress 5.2.4
 
 = 6.5.1 =
 Tested successfully with WordPress 5.2.1

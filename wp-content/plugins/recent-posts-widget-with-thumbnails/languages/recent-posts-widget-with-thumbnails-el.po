@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: Recent Posts Widget With Thumbnails\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/recent-posts-widget-with-"
 "thumbnails\n"
-"POT-Creation-Date: 2019-02-12 17:09+0100\n"
-"PO-Revision-Date: 2019-02-12 17:10+0100\n"
+"POT-Creation-Date: 2019-10-22 11:55+0200\n"
+"PO-Revision-Date: 2019-10-22 11:55+0200\n"
 "Last-Translator: Martin Stehle <m.stehle@gmx.de>\n"
 "Language-Team: Greek\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-KeywordsList: __;_e;_n;_x;esc_html_e;esc_html__;esc_attr_e;"
 "esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2\n"
 "X-Poedit-Basepath: ..\n"
@@ -227,17 +227,23 @@ msgstr ""
 "Να γίνει χρήση της προεπιλεγμένης μικρογραφίας εάν δεν μπορεί να καθοριστεί "
 "εικόνα;"
 
-#: includes/form.php:135
+#: includes/form.php:136
+msgid "Ignore all thumbnails and always use only the default thumbnail?"
+msgstr ""
+"Να αγνοήσετε όλες τις μικρογραφίες και να χρησιμοποιείτε πάντα μόνο την "
+"προεπιλεγμένη μικρογραφία;"
+
+#: includes/form.php:138
 msgid "URL of default thumbnail (start with http://)"
 msgstr "URL της προεπιλεγμένης μικρογραφίας (αρχίζοντας με http://)"
 
-#: includes/form.php:141
+#: includes/form.php:144
 msgid "Print slugs of post categories in class attribute of LI elements?"
 msgstr ""
 "Εκτύπωση των slugs των κατηγοριών των άρθρων στην χαρακτηριστικό class του "
 "LI στοιχείου;"
 
-#: includes/form.php:142
+#: includes/form.php:145
 msgid ""
 "For developers: If checked you can set CSS rules for each list item on base "
 "of the assigned categories."
@@ -245,33 +251,33 @@ msgstr ""
 "Για προγραμματιστές: Αν επιλεγεί θα μπορείτε να ορίσετε CSS κανόνες για κάθε "
 "στοιχείο λίστας βάσει των ανατεθειμένων κατηγοριών."
 
-#: includes/form.php:145
+#: includes/form.php:148
 msgid "Print inline CSS instead of creating a CSS file?"
 msgstr "Εκτυπώστε inline CSS αντί να δημιουργήσετε ένα αρχείο CSS;"
 
-#: includes/form.php:146 includes/form.php:150
+#: includes/form.php:149 includes/form.php:153
 msgid "If activated this option applies to all instances of this widget."
 msgstr ""
 "Εάν ενεργοποιηθεί, αυτή η επιλογή ισχύει για όλες τις εμφανίσεις αυτού του "
 "γραφικού στοιχείου."
 
-#: includes/form.php:149
+#: includes/form.php:152
 msgid "No CSS generation at all, neither inline CSS nor a CSS file?"
 msgstr "Μην δημιουργείτε καθόλου CSS, ούτε CSS inline ούτε ένα αρχείο CSS;"
 
-#: includes/form.php:153
+#: includes/form.php:156
 msgid "Do you like the plugin?"
 msgstr "Σας αρέσει το πρόσθετο;"
 
-#: includes/form.php:153
+#: includes/form.php:156
 msgid "Please rate it at wordpress.org!"
 msgstr "Παρακαλούμε αξιολογήστε το στο wordpress.org!"
 
-#: includes/form.php:154
+#: includes/form.php:157
 msgid "Do you need more options?"
 msgstr "Θέλετε περισσότερες επιλογές;"
 
-#: includes/form.php:154
+#: includes/form.php:157
 msgid "Get Ultimate Post List Pro!"
 msgstr "Αγοράστε το Ultimate Post List Pro!"
 
@@ -292,7 +298,7 @@ msgstr ""
 "Απαριθμείστε τα πιο πρόσφατα άρθρα σας, με δυνατότητα συνδέσμων στους "
 "τίτλους και στις μικρογραφίες. "
 
-#: recent-posts-widget-with-thumbnails.php:765
+#: recent-posts-widget-with-thumbnails.php:766
 msgid "Error on listing categories"
 msgstr "Σφάλμα κατά την δημιουργία λίστας κατηγοριών"
 

@@ -132,6 +132,9 @@ foreach ( $size_options as $option ) {
 <p><input class="checkbox" type="checkbox" <?php checked( $bools[ 'use_default' ] ); ?> id="<?php echo $field_ids[ 'use_default' ]; ?>" name="<?php echo $this->get_field_name( 'use_default' ); ?>" />
 <label for="<?php echo $field_ids[ 'use_default' ]; ?>"><?php esc_html_e( 'Use default thumbnail if no image could be determined?', 'recent-posts-widget-with-thumbnails' ); ?></label></p>
 
+<p><input class="checkbox" type="checkbox" <?php checked( $bools[ 'use_default_only' ] ); ?> id="<?php echo $field_ids[ 'use_default_only' ]; ?>" name="<?php echo $this->get_field_name( 'use_default_only' ); ?>" />
+<label for="<?php echo $field_ids[ 'use_default_only' ]; ?>"><?php esc_html_e( 'Ignore all thumbnails and always use only the default thumbnail?', 'recent-posts-widget-with-thumbnails' ); ?></label></p>
+
 <p><label for="<?php echo $field_ids[ 'default_url' ]; ?>"><?php esc_html_e( 'URL of default thumbnail (start with http://)', 'recent-posts-widget-with-thumbnails' ); ?>:</label>
 <input class="widefat" id="<?php echo $field_ids[ 'default_url' ]; ?>" name="<?php echo $this->get_field_name( 'default_url' ); ?>" type="text" value="<?php echo esc_url( $default_url ); ?>" /></p>
 

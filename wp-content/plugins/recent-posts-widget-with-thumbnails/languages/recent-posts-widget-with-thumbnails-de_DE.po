@@ -5,15 +5,15 @@ msgstr ""
 "Project-Id-Version: Recent Posts Widget With Thumbnails\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/recent-posts-widget-with-"
 "thumbnails\n"
-"POT-Creation-Date: 2019-02-12 17:08+0100\n"
-"PO-Revision-Date: 2019-02-12 17:09+0100\n"
+"POT-Creation-Date: 2019-10-22 11:52+0200\n"
+"PO-Revision-Date: 2019-10-22 11:54+0200\n"
 "Last-Translator: Martin Stehle <m.stehle@gmx.de>\n"
 "Language-Team: Martin Stehle <m.stehle@gmx.de>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-KeywordsList: __;_e;_n;_x;esc_html_e;esc_html__;esc_attr_e;"
 "esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2\n"
 "X-Poedit-Basepath: ..\n"
@@ -225,17 +225,23 @@ msgid "Use default thumbnail if no image could be determined?"
 msgstr ""
 "Standardvorschaubild verwenden, falls kein Bild ermittelt werden konnte?"
 
-#: includes/form.php:135
+#: includes/form.php:136
+msgid "Ignore all thumbnails and always use only the default thumbnail?"
+msgstr ""
+"Alle Vorschaubilder ignorieren und immer nur das Standardvorschaubild "
+"verwenden?"
+
+#: includes/form.php:138
 msgid "URL of default thumbnail (start with http://)"
 msgstr "URL des Standardvorschaubilds (beginnt mit http://)"
 
-#: includes/form.php:141
+#: includes/form.php:144
 msgid "Print slugs of post categories in class attribute of LI elements?"
 msgstr ""
 "Gebe die Titelformen der Beitragskategorien im class-Attribut der LI-"
 "Elemente an?"
 
-#: includes/form.php:142
+#: includes/form.php:145
 msgid ""
 "For developers: If checked you can set CSS rules for each list item on base "
 "of the assigned categories."
@@ -243,31 +249,31 @@ msgstr ""
 "Für Entwickler: Wenn aktiviert, kannst du CSS-Regeln für jeden Listenpunkt "
 "auf Basis der zugewiesenen Kategorien erstellen."
 
-#: includes/form.php:145
+#: includes/form.php:148
 msgid "Print inline CSS instead of creating a CSS file?"
 msgstr "Inline CSS ausgeben anstelle dem Anlegen einer CSS-Datei?"
 
-#: includes/form.php:146 includes/form.php:150
+#: includes/form.php:149 includes/form.php:153
 msgid "If activated this option applies to all instances of this widget."
 msgstr "Wenn aktiviert, gilt die Option für alle Instanzen dieses Widgets."
 
-#: includes/form.php:149
+#: includes/form.php:152
 msgid "No CSS generation at all, neither inline CSS nor a CSS file?"
 msgstr "Keine CSS-Ausgabe, weder Inline CSS noch CSS-Datei?"
 
-#: includes/form.php:153
+#: includes/form.php:156
 msgid "Do you like the plugin?"
 msgstr "Gefällt dir das Plugin?"
 
-#: includes/form.php:153
+#: includes/form.php:156
 msgid "Please rate it at wordpress.org!"
 msgstr "Bewerte es auf wordpress.org!"
 
-#: includes/form.php:154
+#: includes/form.php:157
 msgid "Do you need more options?"
 msgstr "Brauchst du mehr Einstellmöglichkeiten?"
 
-#: includes/form.php:154
+#: includes/form.php:157
 msgid "Get Ultimate Post List Pro!"
 msgstr "Zu Ultimate Post List Pro!"
 
@@ -288,7 +294,7 @@ msgstr ""
 "Liste deiner neuesten Beiträge, mit klickbaren Überschriften und "
 "Vorschaubildern."
 
-#: recent-posts-widget-with-thumbnails.php:765
+#: recent-posts-widget-with-thumbnails.php:766
 msgid "Error on listing categories"
 msgstr "Fehler beim Auflisten der Kategorien"
 
