@@ -4,12 +4,33 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <div class="row story_list_row">
 	<?php if (have_posts()): while (have_posts()): the_post();?>
-								<div class="col-md-6 story_image">	<?php the_post_thumbnail();?></div> <div
-								class="col-md-6 story_description"><strong><h3><?php the_title();?></h3> </strong><?php echo '<div
+								<div class="col-md-8 story_image Story_Image">	<?php the_post_thumbnail();?>
+    
+                                <div class="StoryTitle page-content">
+                                  <a>Story</a>
+                                    
+                                </div>
+    
+    
+                                    <div class="post-content PageContent">
+                                    
+                                        <p class="page_title" style="margin-bottom:0px;font-weight:bold;"><?php the_title();?><?php echo '<div
 								class="entry-content">';
         the_content();
         echo '</div>';
-        ?></div>																									<?php endwhile;endif;?>
+        ?></p> 
+                                    
+                                    </div>
+                                    </div>
+    
+    
+    
+                                <div class="col-md-4 story_description">
+    <?php // Sidebar Right
+get_template_part('templates/sidebars/sidebar', 'right');
+?>
+    
+    </div>																									<?php endwhile;endif;?>
     <div class="small-12 col-md-12 columns">
     <?php
 the_posts_pagination(array(

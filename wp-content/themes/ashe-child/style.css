@@ -52,16 +52,43 @@
   padding-top: 40px !important;
 }
 }
+
+/*
+.Story_Image img{
+width: 100%;
+}
+*/
+
+.PageContent{
+padding: 0px 70px;
+    text-align: justify;}
+
 .story_image img{
       width: 80%;
     height: auto;
     margin: auto;
+    margin-bottom: 20px;
 }
+
+
+.StoryTitle{text-align: center;margin-bottom: 20px;}
+.StoryTitle a{
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #ca9b52!important;    
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+
 .story_list_row{
-  padding: 10%;
+  padding: 5%;
 }
 .story_image{
-  padding-bottom: 10%;
+  padding-bottom: 0%;
 }
 .page-numbers{
   padding: 15px;
