@@ -103,3 +103,9 @@ width: 100%
     background-color: unset!important; 
 }
 .image-overlay a, .post-slider .prev-arrow, .post-slider .next-arrow, .page-content .image-overlay a, #featured-slider .slick-arrow, #featured-slider .slider-dots{color: #ca9b52!important;}
+.about_the_book .wp-post-image{
+  max-width:83% !important;
+}
+.post-title, .page-title {
+    font-size: 32px;
+}
