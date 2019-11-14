@@ -147,7 +147,7 @@ if (have_posts()):
 
         wp_link_pages($defaults);
         echo '</div>';
-        echo '<center><div class="slider-read-more"><a href="' . site_url() . '/stories' . '" target="_blank" rel="noopener noreferrer">Read More</a></div></center>';
+//        echo '<center><div class="slider-read-more"><a href="' . site_url() . '/stories' . '" target="_blank" rel="noopener noreferrer">Read More</a></div></center>';
 
     endwhile; // Loop End
 
