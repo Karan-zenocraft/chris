@@ -139,3 +139,5 @@ width: 100%
 
 .Story_Image img{width: 50%!important;}
 .page-content{overflow: hidden!important;}
+.page-content .Titlelink h2{position: relative;}
+.page-content .Titlelink h2:hover:after{content: '';position: absolute;left: 0;right: 0;margin: auto;width: 180px;height: 1px;background: #000;bottom: 0;transition: 0.3s all;}

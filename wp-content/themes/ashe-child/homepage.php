@@ -4,15 +4,15 @@
 
 get_header();?>
 <div>
-<?php echo do_shortcode('[layerslider id="1"]'); ?>
+    <?php echo do_shortcode('[layerslider id="1"]'); ?>
 </div>
 
 <div class="featured-slider-area<?php echo ashe_options('general_slider_width') === 'boxed' ? ' boxed-wrapper' : ''; ?>">
 
-<!-- Featured Slider -->
-<div id="featured-slider" class="<?php echo esc_attr(ashe_options('general_slider_width')) === 'boxed' ? 'boxed-wrapper' : ''; ?> custom_padding" data-slick="<?php echo esc_attr($slider_data); ?>">
+    <!-- Featured Slider -->
+    <div id="featured-slider" class="<?php echo esc_attr(ashe_options('general_slider_width')) === 'boxed' ? 'boxed-wrapper' : ''; ?> custom_padding" data-slick="<?php echo esc_attr($slider_data); ?>">
 
-	<?php
+        <?php
 
 // Query Args
 $args = array(
@@ -57,67 +57,69 @@ if ($sliderQuery->have_posts()):
         } else {
             $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full', false);
         }
-        ?>																																																																																												  <div class="slider-item">
-																														<div class="slider-item-bg" style="background-image:url(<?php echo esc_url($featured_image[0]); ?>);"></div>
+        ?> <div class="slider-item">
+            <div class="slider-item-bg" style="background-image:url(<?php echo esc_url($featured_image[0]); ?>);"></div>
 
-																																																																																																																																														<div class="cv-container image-overlay">
-																																																																																																																																															<div class="cv-outer">
-																																																																																																																																																<div class="cv-inner">
-																																																																																																																																																	<div class="slider-info">
+            <div class="cv-container image-overlay">
+                <div class="cv-outer">
+                    <div class="cv-inner">
+                        <div class="slider-info">
 
-																																																																																																																																																		<?php $category_list = get_the_category_list(', ');?>
+                            <?php $category_list = get_the_category_list(', ');?>
 
-																																																																																																																																																		<?php if ($category_list): ?>
-																																																																																																																																																		<div class="slider-categories">
-																																																																																																																																																			<?php echo '' . $category_list; ?>
-																																																																																																																																																		</div>
-																																																																																																																																																		<?php endif;?>
+                            <?php if ($category_list): ?>
+                            <div class="slider-categories">
+                                <?php echo '' . $category_list; ?>
+                            </div>
+                            <?php endif;?>
 
-																																																																						<h2 class="slider-title">
-																																																																						<a href="<?php echo esc_url(get_permalink()); ?>"><?php the_title();?></a>
-																																																																						</h2>
+                            <h2 class="slider-title">
+                                <a href="<?php echo esc_url(get_permalink()); ?>"><?php the_title();?></a>
+                            </h2>
 
-																																																																						<div class="slider-content"><?php ashe_excerpt(30);?></div>
+                            <div class="slider-content"><?php ashe_excerpt(30);?></div>
 
-																																																																						<div class="slider-read-more">
-																																																																						<a href="<?php echo esc_url(get_permalink()); ?>" target="_blank"><?php esc_html_e('read more', 'ashe');?></a>
-																																																																						</div>
+                            <div class="slider-read-more">
+                                <a href="<?php echo esc_url(get_permalink()); ?>" target="_blank"><?php esc_html_e('read more', 'ashe');?></a>
+                            </div>
 
-																																																																						<div class="slider-date"><?php the_time(get_option('date_format'));?></div>
+                            <div class="slider-date"><?php the_time(get_option('date_format'));?></div>
 
-																																																																						</div>
-																																																																						</div>
-																																																																						</div>
-																																																																						</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-																																																																						</div>
-																																																																						<?php
+        </div>
+        <?php
 endwhile; // Loop end
 endif;
 
 ?>
 
-</div><!-- #featured-slider -->
+    </div><!-- #featured-slider -->
 
 </div><!-- .featured-slider-area -->
-<a href="<?php echo site_url() ?>/stories"><h2 class="illustration">
-					Meet Hank
-					</h2></a>
+<a href="<?php echo site_url() ?>/stories" class="Titlelink">
+    <h2 class="illustration">
+        Meet Hank
+    </h2>
+</a>
 <div>
-<?php echo do_shortcode('[layerslider id="3"]'); ?>
+    <?php echo do_shortcode('[layerslider id="3"]'); ?>
 </div>
 
 <div class="main-content clear-fix<?php echo (ashe_options('general_single_width') === 'boxed') ? ' boxed-wrapper' : ''; ?>" data-sidebar-sticky="<?php echo esc_attr(ashe_options('general_sidebar_sticky')); ?>">
 
-	<!-- Main Container -->
-	<div class="main-container">
-<?php global $wp_query;
+    <!-- Main Container -->
+    <div class="main-container">
+        <?php global $wp_query;
 $original_query = $wp_query;
 $wp_query = null;
 $wp_query = new WP_Query(array("post_type" => "post", "category_name" => "book"));?>
-		<article id="page-<?php the_ID();?>" <?php post_class();?>>
+        <article id="page-<?php the_ID();?>" <?php post_class();?>>
 
-			<?php
+            <?php
 
 if (have_posts()):
 
@@ -155,14 +157,14 @@ endif;
 
 ?>
 
-		</article>
+        </article>
 
-		<?php get_template_part('templates/single/comments', 'area');?>
+        <?php get_template_part('templates/single/comments', 'area');?>
 
-	</div><!-- .main-container -->
+    </div><!-- .main-container -->
 
 
-	<?php // Sidebar Right
+    <?php // Sidebar Right
 
 get_template_part('templates/sidebars/sidebar', 'right');
 
