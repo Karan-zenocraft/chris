@@ -136,3 +136,6 @@ width: 100%
 .post-title, .page-title {
     font-size: 32px;
 }
+
+.Story_Image img{width: 50%!important;}
+.page-content{overflow: hidden!important;}

@@ -5,7 +5,7 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></scri
 <div class="row story_list_row">
 	<?php if (have_posts()): while (have_posts()): the_post();?>
 										 <?php $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full', false);?>
-		    <div class="col-md-8 story_image Story_Image">
+		    <div class="col-md-9 story_image Story_Image">
 			<img class="slider-item-bg" src="<?php echo esc_url($featured_image[0]); ?>">
 			<div class="StoryTitle page-content">
 			<a>Story</a>
@@ -21,7 +21,7 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></scri
 
 		    </div>
 			</div>
-		    <div class="col-md-4 story_description">
+		    <div class="col-md-3 story_description">
 			<?php get_template_part('templates/sidebars/sidebar', 'right');?>
 
 			</div>																							<?php endwhile;endif;?>
